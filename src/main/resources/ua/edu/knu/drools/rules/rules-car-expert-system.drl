@@ -1,0 +1,56 @@
+package ua.edu.knu.drools.rules
+
+import ua.edu.knu.entities.Car
+
+dialect  "mvel"
+
+//Cars
+rule "Легкові автомобілі"
+when
+    $size : Car(size == "small" || size == "medium") &&
+    $cost : Car(cost > 5000 && cost < 20000) &&
+    $doors : Car(doors == 2 || doors == 4) &&
+    $seats : Car(seats == 2 || seats == 4) &&
+    $wheels : Car(wheels == 4) &&
+    $engineType : Car(engineType == "gasoline" || engineType == "diesel")
+then
+    System.out.println("Це легковий автомобіль");
+end
+
+//Trucks
+rule "Вантажні автомобілі"
+when
+    $size : Car(size == "large") &&
+    $cost : Car(cost > 15000 && cost < 50000) &&
+    $doors : Car(doors == 2) &&
+    $seats : Car(seats == 2) &&
+    $wheels : Car(wheels == 6) &&
+    $engineType : Car(engineType == "diesel")
+then
+    System.out.println("Це вантажний автомобіль");
+end
+
+//Buses
+rule "Автобуси"
+when
+    $size : Car(size == "large") &&
+    $cost : Car(cost > 25000 && cost < 100000) &&
+    $doors : Car(doors == 2) &&
+    $seats : Car(seats > 10 && seats < 50) &&
+    $wheels : Car(wheels == 6) &&
+    $engineType : Car(engineType == "diesel")
+then
+    System.out.println("Це автобус");
+end
+
+//Motorcycles
+rule "Мотоцикли"
+when
+    $size : Car(size == "small") &&
+    $cost : Car(cost > 1000 && cost < 20000) &&
+    $seats : Car(seats == 1 || seats == 2) &&
+    $wheels : Car(wheels == 2) &&
+    $engineType : Car(engineType == "gasoline")
+then
+    System.out.println("Це мотоцикл");
+end
